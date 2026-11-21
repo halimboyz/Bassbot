@@ -1,0 +1,13 @@
+name: build-windows-vst3
+on: [push, workflow_dispatch]
+jobs:
+  win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -B build
+      - run: cmake --build build --config Release --target Bassbot_VST3 --parallel
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BASSBOT-2000-vst3
+          path: build/Bassbot_artefacts/Release/VST3/
